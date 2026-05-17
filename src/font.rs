@@ -33,7 +33,7 @@ pub fn dot_pattern_for(char: char) -> [[bool; 4]; 5] {
             [true, false, false, true],
             [true, false, false, true],
             [true, true, true, true],
-            [true, false, false, true],
+            [false, true, true, false],
         ],
         'r' => [
             [true, true, true, false],
