@@ -30,6 +30,22 @@ pub fn draw_cells_to_pixels(cells: &Vec<Vec<Option<char>>>) -> Vec<Vec<bool>> {
     pixels
 }
 
+pub fn bool_pixels_to_rgb_buffer(pixels: &Vec<Vec<bool>>) -> Vec<u32> {
+    let mut buffer = Vec::new();
+
+    for line in pixels {
+        for pixel in line {
+            if *pixel {
+                buffer.push(0xFFFFFF);
+            } else {
+                buffer.push(0x000000);
+            }
+        }
+    }
+
+    buffer
+}
+
 fn pixel_size_for_cells(cell_count: usize, font_size: usize) -> usize {
     if cell_count == 0 {
         0
@@ -40,7 +56,7 @@ fn pixel_size_for_cells(cell_count: usize, font_size: usize) -> usize {
 
 #[cfg(test)]
 mod tests {
-    use super::draw_cells_to_pixels;
+    use super::{bool_pixels_to_rgb_buffer, draw_cells_to_pixels};
 
     #[test]
     fn draws_cells_to_pixels_with_one_pixel_gap_between_columns_and_rows() {
@@ -54,5 +70,14 @@ mod tests {
 
         assert_eq!(pixels[5][0], false);
         assert_eq!(pixels[6][0], true);
+    }
+
+    #[test]
+    fn converts_bool_pixels_to_rgb_buffer() {
+        let pixels = vec![vec![true, false], vec![false, true]];
+
+        let buffer = bool_pixels_to_rgb_buffer(&pixels);
+
+        assert_eq!(buffer, vec![0xFFFFFF, 0x000000, 0x000000, 0xFFFFFF]);
     }
 }

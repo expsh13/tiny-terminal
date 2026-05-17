@@ -6,6 +6,6 @@ mod text;
 
 pub use cell_buffer::place_chars_in_cells;
 pub use font::dot_pattern_for;
-pub use pixel_buffer::draw_cells_to_pixels;
+pub use pixel_buffer::{bool_pixels_to_rgb_buffer, draw_cells_to_pixels};
 pub use renderer::render_text_to_pixels;
 pub use text::read_chars;
